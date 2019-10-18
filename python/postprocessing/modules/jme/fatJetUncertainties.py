@@ -486,8 +486,8 @@ fatJetUncertainties2016All = lambda : fatJetUncertaintiesProducer("2016", "Summe
 fatJetUncertainties2017 = lambda : fatJetUncertaintiesProducer("2017", "Fall17_17Nov2017_V32_MC", [ "Total" ])
 fatJetUncertainties2017All = lambda : fatJetUncertaintiesProducer("2017", "Fall17_17Nov2017_V32_MC", [ "All" ], redoJEC=True)
 
-fatJetUncertainties2018 = lambda : fatJetUncertaintiesProducer("2018", "Autumn18_V8_MC", [ "Total" ])
-fatJetUncertainties2018All = lambda : fatJetUncertaintiesProducer("2018", "Autumn18_V8_MC", [ "All" ], redoJEC=True)
+fatJetUncertainties2018 = lambda : fatJetUncertaintiesProducer("2018", "Autumn18_V19_MC", [ "Total" ])
+fatJetUncertainties2018All = lambda : fatJetUncertaintiesProducer("2018", "Autumn18_V19_MC", [ "All" ], redoJEC=True)
 
 fatJetUncertainties2016AK4Puppi = lambda : fatJetUncertaintiesProducer("2016", "Summer16_07Aug2017_V11_MC", [ "Total" ], jetType="AK4PFPuppi")
 fatJetUncertainties2016AK4PuppiAll = lambda : fatJetUncertaintiesProducer("2016", "Summer16_07Aug2017_V11_MC",  [ "All" ], jetType="AK4PFPuppi")
@@ -495,8 +495,8 @@ fatJetUncertainties2016AK4PuppiAll = lambda : fatJetUncertaintiesProducer("2016"
 fatJetUncertainties2017AK4Puppi = lambda : fatJetUncertaintiesProducer("2017", "Fall17_17Nov2017_V32_MC", [ "Total" ], jetType="AK4PFPuppi")
 fatJetUncertainties2017AK4PuppiAll = lambda : fatJetUncertaintiesProducer("2017", "Fall17_17Nov2017_V32_MC",  [ "All" ], jetType="AK4PFPuppi")
 
-fatJetUncertainties2018AK4Puppi = lambda : fatJetUncertaintiesProducer("2018", "Autumn18_V8_MC", [ "Total" ], jetType="AK4PFPuppi")
-fatJetUncertainties2018AK4PuppiAll = lambda : fatJetUncertaintiesProducer("2018", "Autumn18_V8_MC",  [ "All" ], jetType="AK4PFPuppi")
+fatJetUncertainties2018AK4Puppi = lambda : fatJetUncertaintiesProducer("2018", "Autumn18_V19_MC", [ "Total" ], jetType="AK4PFPuppi")
+fatJetUncertainties2018AK4PuppiAll = lambda : fatJetUncertaintiesProducer("2018", "Autumn18_V19_MC",  [ "All" ], jetType="AK4PFPuppi")
 
 
 fatJetUncertainties2016AK8Puppi = lambda : fatJetUncertaintiesProducer("2016", "Summer16_07Aug2017_V11_MC", [ "Total" ], jetType="AK8PFPuppi")
@@ -507,6 +507,6 @@ fatJetUncertainties2016AK8PuppiAllNoGroom = lambda : fatJetUncertaintiesProducer
 fatJetUncertainties2017AK8Puppi = lambda : fatJetUncertaintiesProducer("2017", "Fall17_17Nov2017_V32_MC", [ "Total" ], jetType="AK8PFPuppi")
 fatJetUncertainties2017AK8PuppiAll = lambda : fatJetUncertaintiesProducer("2017", "Fall17_17Nov2017_V32_MC", ["All"], jetType="AK8PFPuppi")
 
-fatJetUncertainties2018AK8Puppi = lambda : fatJetUncertaintiesProducer("2018", "Autumn18_V8_MC", [ "Total" ], jetType="AK8PFPuppi")
-fatJetUncertainties2018AK8PuppiAll = lambda : fatJetUncertaintiesProducer("2018", "Autumn18_V8_MC", ["All"], jetType="AK8PFPuppi",redoJEC = True)
+fatJetUncertainties2018AK8Puppi = lambda : fatJetUncertaintiesProducer("2018", "Autumn18_V19_MC", [ "Total" ], jetType="AK8PFPuppi")
+fatJetUncertainties2018AK8PuppiAll = lambda : fatJetUncertaintiesProducer("2018", "Autumn18_V19_MC", ["All"], jetType="AK8PFPuppi",redoJEC = True)
 
