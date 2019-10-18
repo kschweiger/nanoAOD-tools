@@ -11,12 +11,13 @@ from PhysicsTools.NanoAODTools.postprocessing.modules.jme.jetSmearer import jetS
 from PhysicsTools.NanoAODTools.postprocessing.modules.jme.JetReCalibrator import JetReCalibrator
 
 class jetmetUncertaintiesProducer(Module):
-    def __init__(self, era, globalTag, jesUncertainties = [ "Total" ], archive=None, globalTagProd=None, jetType = "AK4PFchs", metBranchName="MET", jerTag="", isData=False, redoJEC=False):
+    def __init__(self, era, globalTag, jesUncertainties = [ "Total" ], archive=None, globalTagProd=None, jetType = "AK4PFchs", metBranchName="MET", jerTag="", isData=False, redoJEC=False, increaseHEMUnc=False):
 
         # globalTagProd only needs to be defined if METFixEE2017 is to be recorrected, and should be the GT that was used for the production of the nanoAOD files
         self.era = era
         self.isData = isData
         self.redoJEC = redoJEC
+        self.increaseHEMUnc = increaseHEMUnc
         
         self.metBranchName = metBranchName
         self.rhoBranchName = "fixedGridRhoFastjetAll"
@@ -361,6 +362,10 @@ class jetmetUncertaintiesProducer(Module):
                   self.jesUncertainty[jesUncertainty].setJetPt(jet_pt_nom)
                   self.jesUncertainty[jesUncertainty].setJetEta(jet.eta)
                   delta = self.jesUncertainty[jesUncertainty].getUncertainty(True)
+                  if self.increaseHEMUnc:
+                      if jet.eta > -3.1 and jet.eta < -1.3 and jet.phi > -1.57 and jet.phi < -0.87:
+                          delta = delta * 1.2
+                          
                   jet_pt_jesUp[jesUncertainty]   = jet_pt_nom*(1. + delta)
                   jet_pt_jesDown[jesUncertainty] = jet_pt_nom*(1. - delta)
                   if iJet < nJet:
