@@ -11,13 +11,15 @@ from PhysicsTools.NanoAODTools.postprocessing.modules.jme.jetSmearer import jetS
 from PhysicsTools.NanoAODTools.postprocessing.modules.jme.JetReCalibrator import JetReCalibrator
 
 class jetmetUncertaintiesProducer(Module):
-    def __init__(self, era, globalTag, jesUncertainties = [ "Total" ], archive=None, globalTagProd=None, jetType = "AK4PFchs", metBranchName="MET", jerTag="", isData=False, applySmearing=True):
+    def __init__(self, era, globalTag, jesUncertainties = [ "Total" ], archive=None, globalTagProd=None, jetType = "AK4PFchs", metBranchName="MET", jerTag="", isData=False, applySmearing=True, redoJEC=False):
 
         # globalTagProd only needs to be defined if METFixEE2017 is to be recorrected, and should be the GT that was used for the production of the nanoAOD files
         self.era = era
         self.isData = isData
         self.applySmearing = applySmearing if not isData else False # if set to true, Jet_pt_nom will have JER applied. not to be switched on for data.
 
+        self.redoJEC = redoJEC
+        
         self.metBranchName = metBranchName
         self.rhoBranchName = "fixedGridRhoFastjetAll"
         #--------------------------------------------------------------------------------------------
@@ -77,12 +79,11 @@ class jetmetUncertaintiesProducer(Module):
                 sources = map(lambda x: x[1:-1], sources)
                 self.jesUncertainties = sources
 
-        # Define the jet recalibrator            
+        # Define the jet recalibrator
         self.jetReCalibrator = JetReCalibrator(globalTag, jetType , True, self.jesInputFilePath, calculateSeparateCorrections = False, calculateType1METCorrection  = False)
 
         # Define the recalibrator for level 1 corrections only
         self.jetReCalibratorL1  = JetReCalibrator(globalTag, jetType , False, self.jesInputFilePath, calculateSeparateCorrections = True, calculateType1METCorrection  = False, upToLevel=1)
-
         # Define the recalibrators for GT used in nanoAOD production (only needed to reproduce 2017 v2 MET)
         if globalTagProd:
           self.jetReCalibratorProd    = JetReCalibrator(globalTagProd, jetType , True, self.jesInputFilePath, calculateSeparateCorrections = False, calculateType1METCorrection  = False)
@@ -268,11 +269,12 @@ class jetmetUncertaintiesProducer(Module):
                 jet_rawpt = -1.0 * jet_pt #If factor not present factor will be saved as -1
                 jet_rawmass = -1.0 * jet_mass #If factor not present factor will be saved as -1
 
-            (jet_pt, jet_mass)    = self.jetReCalibrator.correct(jet,rho)
-            (jet_pt_l1, jet_mass_l1) = self.jetReCalibratorL1.correct(jet,rho)
-            jet.pt = jet_pt
-            jet.mass = jet_mass
+            if self.redoJEC:
+                (jet_pt, jet_mass)    = self.jetReCalibrator.correct(jet,rho)
+                jet.pt = jet_pt
+                jet.mass = jet_mass
 
+            (jet_pt_l1, jet_mass_l1) = self.jetReCalibratorL1.correct(jet,rho)
             # Get the JEC factors
             jec   = jet_pt/jet_rawpt
             jecL1 = jet_pt_l1/jet_rawpt
