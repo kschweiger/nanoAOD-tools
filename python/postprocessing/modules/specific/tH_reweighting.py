@@ -52,7 +52,7 @@ class TH_weights( Module ):
         self.mods=[]
         self.tmpdirs=[]
         if 'psi.ch' in os.environ['HOSTNAME']:
-            self.tmpdir='/scratch/'
+            self.tmpdir='/scratch/'+os.environ['USER']+'/'
         else:
             self.tmpdir='/tmp/'
 
